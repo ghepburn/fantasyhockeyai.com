@@ -9,10 +9,7 @@ class DataTransformer {
     ]
 
     static transform(arrayData) {
-        console.log("transform")
         try{
-
-            console.log(arrayData);
 
             // separate headers and content
             const headerRow = this.getHeaderRow(arrayData);
@@ -25,7 +22,10 @@ class DataTransformer {
             return jsonData;
 
         } catch(e) {
+
             console.log("Error transforming data: " + e.message);
+            throw new Error(e.message);
+        
         }
     }
 
@@ -55,7 +55,7 @@ class DataTransformer {
             // output object
             const jsonData = {};
 
-            // remove unwanted columns
+            // remove unwanted columns & place into json object
             for (let i = 0; i < headers.length; i++) {
                 
                 if (!this.headersToIgnore.includes(headers[i])) {

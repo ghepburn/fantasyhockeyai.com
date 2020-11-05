@@ -1,17 +1,27 @@
-class DataValidator {
+export default class DataValidator {
+
+    static colPlayerWhiteList = ["Rk", "Name", "Team", "Age", "Pos", "GP", "G", "A", "P", "PIM", "+/-", "TOI", "ES", "PP", "SH", "ESG", "PPG", "SHG",	"GWG", "OTG", "ESA", "PPA",	"SHA", "GWA", "OTA", "ESP",	"PPP", "SHP", "GWP", "OTP",	"PPP%",	"G/60",	"A/60",	"P/60",	"ESG/60", "ESA/60",	"ESP/60", "PPG/60",	"PPA/60", "PPP/60",	"G/GP",	"A/GP",	"P/GP",	"SHOTS", "SH%",	"HITS",	"BS", "FOW", "FOL",	"FO%"];
+    static colGoalieWhiteList = ["Rk", "Name", "Team", "Age", "GP", "GAA", "SV%", "W", "L", "SO", "TIME", "G", "A", "P", "PIM"];
+    static blackList = ["select", "from", "table", "insert", "delete"]
 
     static isValid(jsonDataArray) {
-        console.log("Validator");
-        console.log(jsonDataArray);
-
-        // validate object attributes
-        const validAttributes = this.validateAttributes(jsonDataArray);
-
-        // validate object attribute value
-        const validValues = this.validateAttributValues(jsonDataArray);
 
         // validate upload size
         const validSize = this.validateSize(jsonDataArray);
+
+        // check each row of data
+        let validAttributes;
+        let validValues;
+        for (const dataRow of jsonDataArray) {
+
+            // validate object attributes
+            validAttributes = this.validateAttributes(dataRow);
+
+            // validate object attribute value
+            validValues = this.validateAttributeValues(dataRow);
+        }
+
+        
 
         if (validAttributes && validValues && validSize) {
             return true;
@@ -20,64 +30,98 @@ class DataValidator {
         }
     }
 
+    /**
+     * 
+     * @param {Object} data
+     * @returns boolean 
+     * 
+     * checks if data object attributes are legit
+     */
     static validateAttributes(data) {
-        
-    }
+        try {
+            const cols = Object.keys(data);
 
-    static validateAttributeValues(data) {
-
-    }
-
-    static validateSize(data) {
-        const cols = Object.keys(data);
-        colsLength = cols.length;
-        const rowsLength = data[cols[0]].length;
-
-        const validSize = true;
-        if (colsLength > 100) {
-            validSize = false;
-        }
-        if (rowsLength > 500) {
-            validSize = false;
-        }
-
-        return valideSize;
-        
-    }
-        
-
-            for (let jsonData of jsonDataArray) {
-                // validate keys
-                const keys = Object.keys(jsonData);
-                if (keys.length === 0) {
+            // check each column value
+            for (const col of cols) {
+                if (!this.colPlayerWhiteList.includes(col) && !this.colGoalieWhiteList.includes(col)) {
+                    console.log("Col not in whitelist: " + col);
                     return false;
-                }
-                for (let key of keys) {
-                    if (key.length === 0) {
-                        return false;
-                    }
-                }
-
-                // validate values
-                const values = Object.values(jsonData);
-                if (values.length === 0) {
-                    return false;
-                }
-                for (let value of values) {
-                    if (value === undefined) {
-                        return false;
-                    }
                 }
             }
 
             return true;
 
-
         } catch(e) {
-            console.log("Validator error. : " + e);
-            return false;
+            console.log("Validation failed checking column values: " + e.message);
+            throw new Error(e.message);
         }
     }
-}
 
-export default DataValidator;
+    /**
+     * 
+     * @param {Object} data
+     * @returns boolean
+     * 
+     * checks if object values are legit 
+     */
+    static validateAttributeValues(data) {
+        try {
+
+            const values = Object.values(data);
+
+            // check each array of values
+            for (const value of values) {
+                // check each item in the array
+                for (const item of value) {
+                    
+                    if (item.length > 50) {   //check character length
+                        console.log("Data values exceed character limit.")
+                        return false;
+                    }
+
+                    if (item.length === 0) {   //check against blank values
+                        console.log("Data value is blank.")
+                        return false;
+                    }
+                    
+                    if (this.blackList.includes(item.toLowerCase())) {   //check against word blacklist
+                        console.log("Invalid data value provided.")
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+        } catch(e) {
+            console.log("Validation failed checking data values: " + e.message);
+            throw new Error(e.message);
+        }
+
+    }
+
+    static validateSize(data) {
+        
+        try{
+            // define data variables
+            const colsLength = Object.keys(data[0]).length;
+            const rowsLength = data.length;
+
+            // check against defined limits
+            const validSize = true;
+
+            if (colsLength > 100) {
+                validSize = false;
+            }
+            if (rowsLength > 500) {
+                validSize = false;
+            }
+
+            return validSize;
+        } catch(e) {
+            console.log("Validation failed checking size: " + e.message);
+            throw new Error(e.message);
+        }
+        
+        
+    }
+}
