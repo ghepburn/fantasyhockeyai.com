@@ -1,7 +1,8 @@
 from .app import db
 
 class Player(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(65), primary_key=True)
+    year = db.Column(db.String(9))
     name= db.Column(db.String(50))
     team = db.Column(db.String(50))
     age = db.Column(db.Integer)
@@ -53,7 +54,8 @@ class Player(db.Model):
     foPercent = db.Column(db.Float)
 
 class Goalie(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+    id = db.Column(db.String(65), primary_key=True)
+    year = db.Column(db.String(9))
     name= db.Column(db.String(50))
     team = db.Column(db.String(50))
     age = db.Column(db.Integer)

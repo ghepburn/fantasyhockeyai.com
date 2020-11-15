@@ -5,17 +5,21 @@ import pandas as pd
 import copy
 
 class Transformer:
-    idCount = 0
 
     @classmethod
-    def transformNHLData(cls, nhlData):
-        print("transforming")
+    def transformNHLData(cls, nhlData, year):
+
+        # add year
+        nhlData['year'] = year
 
         # transform col names
         data = cls.transformColumnNames(nhlData)
 
         # transform value formats
         data = cls.transformValues(data)
+
+        # create & insert id
+        data = cls.addId(data)
 
         # transform to data model
         dataModel = cls.transformToDataModel(data)
@@ -24,7 +28,6 @@ class Transformer:
     
     @classmethod
     def transformColumnNames(cls, data):
-        print("transforming column names")
 
         result = {}
 
@@ -44,7 +47,6 @@ class Transformer:
 
     @classmethod
     def transformValues(cls, data):
-        print("transforming values.")
         
         result = {}
 
@@ -92,3 +94,24 @@ class Transformer:
             return True
 
         return False
+
+    @classmethod
+    def addId(cls, data):
+
+        year = data['year']
+        name = data['name']
+
+        # re-format name w no spaces and no caps
+        name = name.lower()
+        nameList = name.split(" ")
+        name = "".join(nameList)
+
+        # combine name and year for id
+        id = name + year
+
+        data["id"] = id
+
+        return data
+
+
+

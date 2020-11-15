@@ -17,14 +17,12 @@ def home():
 @app.route("/api/nhl", methods=['POST'])
 def inputData():
 
-    print("got data")
-
     try:
 
         # recieve
         jsonData = json.loads(request.data)
         nhlData = jsonData['data']
-        print(nhlData)
+        year = jsonData['year']
 
         # validate
         isValid = Validator.validateNHLData(nhlData)
@@ -36,15 +34,16 @@ def inputData():
             for athlete in nhlData:
 
                 # transform
-                transformedNHLData = Transformer.transformNHLData(athlete)
-
-                print(transformedNHLData)
+                transformedNHLData = Transformer.transformNHLData(athlete, year)
 
                 # load
                 loadedAthlete = Loader.loadNHLData(transformedNHLData)
 
                 # append
-                result.append(loadedAthlete)
+                result.append(athlete)
+
+            # print
+            print("Import complete.")
 
             # return
             return json.dumps(result)
@@ -54,5 +53,4 @@ def inputData():
 
     except:
         print("Backend import failed.")
-        print(str(sys.exc_info()[0]))
         return "Backend import failed."

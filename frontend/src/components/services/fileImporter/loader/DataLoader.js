@@ -1,13 +1,18 @@
-import {axios} from "axios"
+import axios from "axios"
 
 class DataLoader {
 
     static postEndpoint = "/api/nhl"
 
-    static async load(transformedJsonData) {
+    static async load(transformedJsonData, year) {
 
         // serialize
-        const payload = this.serializePayload = (transformedJsonData);
+        // const serializedData = this.serializePayload(transformedJsonData);
+
+        // format
+        const payload = this.formatPayload(transformedJsonData, year);
+
+        console.log(payload);
         
         // get headers
         const headers = this.getHeaders();
@@ -19,8 +24,7 @@ class DataLoader {
     }
 
     static serializePayload(data) {
-        const jsonPayload = {athletes: data}
-        const payload = JSON.stringify(jsonPayload);
+        const payload = JSON.stringify(data);
         return payload;
     }
 
@@ -32,11 +36,21 @@ class DataLoader {
         return headers;
     }
 
+    static formatPayload(data, year) {
+        const payload = {
+            data: data,
+            year: year
+        }
+        return payload;
+    }
+
     static async postToBackend(payload, headers) {
         try {
-            console.log(payload);
-            // const response = await axios.post(this.postEndpoint, payload);
-            // return response;
+            const config = {headers: headers};
+            const response = await axios.post(this.postEndpoint, payload, config);
+            console.log("response is:")
+            console.log(response);
+            return response;
 
         } catch(e) {
             console.log("Error posting to backend: " + e.message);

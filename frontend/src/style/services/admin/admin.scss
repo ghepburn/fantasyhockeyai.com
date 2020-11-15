@@ -34,3 +34,19 @@
     border: none;
     cursor: pointer;
 }
+
+.inputYear {
+    margin-bottom: 5%;
+}
+
+.inputErrorMessage {
+    font-size: 50%;
+    color:red;
+    margin-bottom: 5%;
+}
+
+.inputSuccessMessage {
+    font-size: 50%;
+    color:green;
+    margin-bottom: 5%;
+}

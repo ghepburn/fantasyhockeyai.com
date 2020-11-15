@@ -60,7 +60,7 @@ class DataTransformer {
                 
                 if (!this.headersToIgnore.includes(headers[i])) {
                     jsonData[headers[i]] = row.data[i];
-                }   
+                }  
             }
 
             return jsonData;
