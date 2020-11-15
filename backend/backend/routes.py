@@ -1,5 +1,7 @@
 from flask import Flask, request
 import json
+import sys
+
 from .app import app
 from .models import Player, Goalie
 
@@ -15,24 +17,42 @@ def home():
 @app.route("/api/nhl", methods=['POST'])
 def inputData():
 
-    # recieve
-    nhlData = json.loads(request.data)
-    print("recieved")
-    print(nhlData["name"])
+    print("got data")
 
-    # validate
-    isValid = Validator.validateNHLData(nhlData)
-    
-    if isValid:
- 
-        # transform
-        transformedNHLData = Transformer.transformNHLData(nhlData)
+    try:
 
-        # load
-        Loader.loadNHLData(transformedNHLData)
+        # recieve
+        jsonData = json.loads(request.data)
+        nhlData = jsonData['data']
+        print(nhlData)
 
-        # return
-        return json.dumps(transformedNHLData)
+        # validate
+        isValid = Validator.validateNHLData(nhlData)
+        
+        if isValid:
 
-    else:
-        return "Input data is not formatted correctly."
+            result = []
+            
+            for athlete in nhlData:
+
+                # transform
+                transformedNHLData = Transformer.transformNHLData(athlete)
+
+                print(transformedNHLData)
+
+                # load
+                loadedAthlete = Loader.loadNHLData(transformedNHLData)
+
+                # append
+                result.append(loadedAthlete)
+
+            # return
+            return json.dumps(result)
+
+        else:
+            return "Input data is not formatted correctly."
+
+    except:
+        print("Backend import failed.")
+        print(str(sys.exc_info()[0]))
+        return "Backend import failed."

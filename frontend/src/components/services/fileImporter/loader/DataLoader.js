@@ -34,9 +34,9 @@ class DataLoader {
 
     static async postToBackend(payload, headers) {
         try {
-
-            const response = await axios.post(this.postEndpoint, payload);
-            return response;
+            console.log(payload);
+            // const response = await axios.post(this.postEndpoint, payload);
+            // return response;
 
         } catch(e) {
             console.log("Error posting to backend: " + e.message);
