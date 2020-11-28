@@ -1,11 +1,13 @@
 import React from 'react';
-import SettingsForm from "./SettingsForm";
+import CategorySelectionForm from "./CategorySelectionForm";
 
 const CategorySelection = () => {
     return (  
-        <div className="categorySelection">
-            Choose Your Settings
-            <SettingsForm />
+        <div className="settingsSelectionSection">
+            <div className="settingsSelectionSectionTitle">
+                Choose Your Settings
+            </div>
+            <CategorySelectionForm />
         </div>
     );
 }

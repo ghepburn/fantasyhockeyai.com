@@ -1,11 +1,13 @@
 import React from 'react';
-import WeightForm from "./WeightForm";
+import WeightSelectionForm from "./WeightSelectionForm";
 
 const WeightSlection = () => {
     return (  
-        <div clssName="weightSelection">
-            Select Your Weights
-            <WeightForm />
+        <div className="settingsSelectionSection">
+            <div className="settingsSelectionSectionTitle">
+                Select Your Weights
+            </div>
+            <WeightSelectionForm />
         </div>
     );
 }

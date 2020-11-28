@@ -8,7 +8,6 @@ import PasswordPrompt from "../../admin/PasswordPrompt";
 const AdminRoute = ({history, component}) => {
     
     const userContext = useContext(UserContext);
-    console.log(userContext.getUser());
 
     if (userContext.getUser().isAdmin()) {
         return (

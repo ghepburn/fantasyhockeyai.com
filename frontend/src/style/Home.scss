@@ -1,26 +1,44 @@
+@import "Variables";
+
 .home {
-    display: flex;
-    flex-direction: column;
     margin-bottom: 5%;
+    margin-right: 0%;
 }
+
 .title {
     font-size: 250%;
-    margin-bottom: 0%;
-    padding-bottom: 0%;
     letter-spacing: 2px;
-    display: flex;
     justify-content: space-around;
+    margin-bottom: -10%;
 }
 
 .AI {
-    color: red;
+    color: $secondary-color;
     font-size: 110%;
 }
 
 .intro {
-    width: 100%;
-    font-size: 85%;
     padding-bottom: 10%;
-    display: flex;
     justify-content: space-around;
+}
+
+// NON-MOBILE
+// -------------------------------
+@media(min-width: 900px) {
+
+    .intro {
+        padding-bottom: 4%;
+        font-size: 80%;
+    }
+
+    .home {
+        margin-bottom: 2%;
+    }
+
+    .title{
+        margin: -1%;
+        padding: 0%;
+    }
+
+
 }

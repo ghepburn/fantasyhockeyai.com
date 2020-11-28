@@ -2,7 +2,7 @@ import React from 'react';
 import PlayerSettings from "./players/PlayerSettings";
 import GoalieSettings from "./goalies/GoalieSettings";
 
-const SettingsForm = () => {
+const CategorySelectionForm = () => {
     return (  
         <div className="form">
             <PlayerSettings />
@@ -11,4 +11,4 @@ const SettingsForm = () => {
     );
 }
  
-export default SettingsForm;
+export default CategorySelectionForm;

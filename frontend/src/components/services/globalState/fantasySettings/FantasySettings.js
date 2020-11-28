@@ -22,6 +22,10 @@ export class PlayerSettings {
 export class GoalieSettings {
     saves = new Category("S", false, 0.2);
     wins = new Category("W", false, 3);
+    awins = new Category("W", false, 3);
+    bwins = new Category("W", false, 3);
+    cwins = new Category("W", false, 3);
+    dwins = new Category("W", false, 3);
 } 
 
 class Category {

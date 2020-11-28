@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
-import SettingsFormCategory from '../SettingsFormCategory';
+import CategoryButton from '../utils/CategoryButton';
 import FantasySettingsContext from "../../../globalState/fantasySettings/FantasySettingsContext";
-
+import FormSection from "../../utils/FormSection"
 
 const PlayerSettings = () => {
 
@@ -18,21 +18,21 @@ const PlayerSettings = () => {
         fantasySettingsContext.setFantasySettings(fantasySettings);
     }
 
-    const formCategories = Object.entries(fantasySettings.PlayerSettings).map((player)=> {
+    // map each player to desired state
+    const formItems = Object.entries(fantasySettings.PlayerSettings).map((player)=> {
         const name = player[0];
         const shortLabel = player[1].shortLabel;
         const show = player[1].show;
         
         return(
-            <SettingsFormCategory label={name} shortLabel={shortLabel} onClick={handleClick} show={show}/>
+            <CategoryButton label={name} shortLabel={shortLabel} onClick={handleClick} show={show}/>
         );
     })
 
+    
+
     return (  
-        <div className="formSection">
-            Players:
-            {formCategories}
-        </div>
+        <FormSection title={"Players:"} content={formItems}/>
     );
 }
  

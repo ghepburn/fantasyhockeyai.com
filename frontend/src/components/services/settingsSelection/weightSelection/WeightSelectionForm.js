@@ -4,7 +4,7 @@ import GoalieWeights from "./goalies/GoalieWeights";
 
 const WeightForm = () => {
     return (  
-        <div className="form weightForm">
+        <div className="form">
             <PlayerWeights />
             <GoalieWeights />
         </div>

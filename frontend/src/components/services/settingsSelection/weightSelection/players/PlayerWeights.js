@@ -1,7 +1,7 @@
 import React, {useContext, useState} from 'react';
-import SettingsFormWeight from '../SettingsFormWeight';
+import WeightInput from '../utils/WeightInput';
 import FantasySettingsContext from "../../../globalState/fantasySettings/FantasySettingsContext";
-
+import FormSection from "../../utils/FormSection"
 
 const PlayerWeights = () => {
 
@@ -17,28 +17,20 @@ const PlayerWeights = () => {
     const handleSubmit = () => {
         fantasySettingsContext.setFantasySettings(fantasySettings);
     }
-    console.log("Showing players");
-    console.log(fantasySettings.PlayerSettings);
-    const formWeights = Object.entries(fantasySettings.PlayerSettings).filter(player=>player[1].show === true)
+    
+    const formItems = Object.entries(fantasySettings.PlayerSettings).filter(player=>player[1].show === true)
     .map((player)=> {
         const name = player[0];
         const shortLabel = player[1].shortLabel;
         const weight = player[1].weight;
         
         return(
-            <SettingsFormWeight label={name} shortLabel={shortLabel} weight={weight} handleChange={handleChange} />
+            <WeightInput label={name} shortLabel={shortLabel} weight={weight} handleChange={handleChange} />
         );
     })
 
     return (  
-        <div className="formSection">
-            <div className="sectionTitle">
-                Players:
-            </div>
-            <div className="sectionContent">
-                {formWeights}
-            </div>
-        </div>
+        <FormSection title={"Players:"} content={formItems}/>
     );
 }
  

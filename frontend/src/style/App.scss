@@ -1,55 +1,19 @@
-@import 'Home.scss';
+@import 'Variables';
+@import 'Defaults';
+@import 'Nav';
+@import 'Home';
 @import 'services/settingsSelection/general';
 @import 'services/admin/admin';
 @import 'buttons';
+@import 'Forms';
+
 
 .app {
-    background-color: #282c34;
+    background-color: $main-background-color;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: calc(10px + 2vmin);
-    color: white;
-}
-
-.main {
-    height: 100%;
-    width: 75%;
-}
-
-.form {
-    background-color: white;
-    border-radius: 20px;
-    color: black;
-    padding: 2%;
-    margin-left: 5%;
-    margin-right: 5%;
-}
-
-.formSection {
-    display: flex;
-    flex-direction: row;
-}
-.formCategory {
-    color: grey;
-    font-size: 70%;
-    padding-top: 0px;
-    padding-left: 1%;
-    padding-right: 1%;
-}
-
-.nav {
-    font-size: 60%;
-    font-weight: bold;
-    display: flex;
-    justify-content: space-between;
-}
-
-.navItem {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
-    margin-left: 5%;
-    margin-right: 5%;
+    font-size: $default-font-size;
+    color: $main-text-color;
 }
