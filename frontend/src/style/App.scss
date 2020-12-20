@@ -2,11 +2,14 @@
 @import 'Defaults';
 @import 'Nav';
 @import 'Home';
-@import 'services/settingsSelection/general';
-@import 'services/admin/admin';
 @import 'buttons';
 @import 'Forms';
+@import 'Tables';
 
+// import services
+@import 'services/settingsSelection/general';
+@import 'services/admin/admin';
+@import 'services/dashboard/dashboard';
 
 .app {
     background-color: $main-background-color;

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import Title from "./Title";
-import Intro from "./Intro";
 import ShiftButton from "./ShiftButton";
 import CategorySelection from "../services/settingsSelection/categorySelection/CategorySelection";
 import WeightSelection from "../services/settingsSelection/weightSelection/WeightSelection";
@@ -42,7 +41,7 @@ const Home = ({history}) => {
         <div className="home">
 
             <Title />
-            <Intro />
+            
             <div className="settingsSelection">
                 {categorySelection}
                 {weightSelection}

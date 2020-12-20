@@ -21,7 +21,7 @@ const PlayerSettings = () => {
     // map each player to desired state
     const formItems = Object.entries(fantasySettings.PlayerSettings).map((player)=> {
         const name = player[0];
-        const shortLabel = player[1].shortLabel;
+        const shortLabel = player[1].shortName;
         const show = player[1].show;
         
         return(

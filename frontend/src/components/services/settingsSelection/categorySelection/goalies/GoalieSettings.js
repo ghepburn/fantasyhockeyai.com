@@ -19,7 +19,7 @@ const GoalieSettings = () => {
 
     const formItems = Object.entries(fantasySettings.GoalieSettings).map((goalie)=> {
         const name = goalie[0];
-        const shortLabel = goalie[1].shortLabel;
+        const shortLabel = goalie[1].shortName;
         const show = goalie[1].show;
         
         return(

@@ -1,7 +1,7 @@
 import React, {useState, useContext} from 'react';
 import DisplaySettingsContext from "../../globalState/displaySettings/DisplaySetttingsContext";
 
-const SelectionFormButton = ({handleClick, label, highlight}) => {
+const SelectionFormButton = ({handleClick, label, shortLabel, highlight}) => {
     
     // set context
     const displaySettingsContext = useContext(DisplaySettingsContext);
@@ -21,7 +21,7 @@ const SelectionFormButton = ({handleClick, label, highlight}) => {
 
     return (  
         <button className="button categoryButton" name={label} onClick={handleButtonClick} style={{backgroundColor: backgroundColor}}>
-            {label}
+            {shortLabel}
         </button>
     );
 }

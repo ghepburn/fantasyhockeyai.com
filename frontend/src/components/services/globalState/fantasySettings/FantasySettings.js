@@ -13,8 +13,8 @@ export class PlayerSettings {
    hits = new Category("Hts", false, 0.25);
    pim = new Category("Pim", false, 0.25);
    "+/-" = new Category("+/-", false, 0.25);
-   ppp = new Category("ppp", false, 0.25);
-   shp = new Category("shp", false, 0.25);
+   ppp = new Category("Ppp", false, 0.25);
+   shp = new Category("Shp", false, 0.25);
    otg = new Category("Otg", false, 0.25);
    gwg = new Category("Gwg", false, 0.25);
 }
