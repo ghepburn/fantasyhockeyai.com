@@ -4,7 +4,10 @@ import ShiftButton from "./ShiftButton";
 import CategorySelection from "../services/settingsSelection/categorySelection/CategorySelection";
 import WeightSelection from "../services/settingsSelection/weightSelection/WeightSelection";
 
-const Home = ({history}) => {
+import withDashboardContext from "../services/globalState/decoraters/withDashboardContext";
+import Client from "../services/client/Client";
+
+const Home = ({history, setData}) => {
 
     let [stage, setStage] = useState(1);
 
@@ -26,7 +29,12 @@ const Home = ({history}) => {
         setShowEnd(false);
     }
 
-    const clickEnd = () => {
+    const clickEnd = async () => {
+        //set up env
+        const players = await Client.getPlayers();
+        await setData(players);
+
+        //redirect  
         history.push("/dashboard");
     }
 
@@ -55,4 +63,4 @@ const Home = ({history}) => {
     );
 }
  
-export default Home;
+export default withDashboardContext(Home);

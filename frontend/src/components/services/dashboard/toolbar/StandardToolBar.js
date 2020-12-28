@@ -1,6 +1,7 @@
 import React from 'react';
 
-import ColumnFilterButton from "../functionality/filter/columnFilter/columnFilterButton";
+import ColumnFilterButton from "./buttons/columnFilter/ColumnFilterButton";
+// import RowFilterButton from "./buttons/rowFilter/RowFilterButton";
 
 const StandardToolBar = ({tableState}) => {
 
@@ -10,7 +11,8 @@ const StandardToolBar = ({tableState}) => {
                 TOOLBAR
             </div>
             <div className="toolbar-row">
-                <ColumnFilterButton tableState={tableState} />
+                <ColumnFilterButton  />
+                {/* <RowFilterButton /> */}
             </div>
         </div>
     );

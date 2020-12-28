@@ -1,6 +1,7 @@
 from .app import db
+from sqlalchemy_serializer import SerializerMixin
 
-class Player(db.Model):
+class Player(db.Model, SerializerMixin):
     id = db.Column(db.String(65), primary_key=True)
     year = db.Column(db.String(9))
     name= db.Column(db.String(50))
@@ -53,7 +54,7 @@ class Player(db.Model):
     fol = db.Column(db.Integer)
     foPercent = db.Column(db.Float)
 
-class Goalie(db.Model):
+class Goalie(db.Model, SerializerMixin):
     id = db.Column(db.String(65), primary_key=True)
     year = db.Column(db.String(9))
     name= db.Column(db.String(50))

@@ -9,6 +9,7 @@ import {DisplaySettings} from "./displaySettings/DisplaySettings";
 import DisplaySettingsContext from './displaySettings/DisplaySetttingsContext';
 import Tools from "./tools/Tools";
 import ToolsContext from './tools/ToolsContext';
+import DashboardState from "./dashboard/DashboardState";
 
 
 class GlobalState extends Component {
@@ -64,7 +65,9 @@ class GlobalState extends Component {
                 <DisplaySettingsContext.Provider value={{getDisplaySettings: this.getDisplaySettings, setDisplaySettings: this.setDisplaySettings}} >
                     <UserContext.Provider value = {{getUser: this.getUser, setUser: this.setUser}} >
                         <FantasySettingsContext.Provider value = {{getFantasySettings: this.getFantasySettings, setFantasySettings: this.setFantasySettings}} >
-                            {this.props.children}
+                            <DashboardState >
+                                {this.props.children}
+                            </DashboardState>
                         </FantasySettingsContext.Provider>
                     </UserContext.Provider>
                 </DisplaySettingsContext.Provider>

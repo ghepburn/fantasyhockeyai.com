@@ -1,12 +1,17 @@
 /**
  * transforms an array of strings into a JS object using values as keys and true/false as values
  */
-export default class FilterableObject {
+export default class Filter {
 
-    constructor(stringArray) {  
+    constructor(stringArray, checked=true) {  
+        this.checked = checked;
         for (let i = 0; i <  stringArray.length; i++) {
             const field = stringArray[i]; 
-            this[field] = true;         
+            this[field] = checked;         
         }
+    }
+
+    addItem = (item) => {
+        this[item] = this.checked;
     }
 }

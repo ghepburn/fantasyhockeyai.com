@@ -1,30 +1,27 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import withDashboardContext from "../../globalState/decoraters/withDashboardContext";
+import Row from "./rows/Row";
+import Headers from "./rows/Headers";
 
-import Row from "./utils/Row";
-import HeaderRow from "./utils/HeaderRow";
-
-import TableState from "./state/tableState"
-
-/**
- * Displays an array of objects as a table
- * 
- * @param {data} - array of objects 
- */
-const StandardTable = ({tableState}) => {
-
-    const headers = <HeaderRow tableState={tableState} />
-    const rows = tableState.data.map((obj) => {
+const StandardTable = ({data}) => {
+    
+    let count = 0;
+    const rows = data.map((dataEntity) => {
         return(
-            <Row identifier={obj.pk} data={obj} />
+            <Row identifier={count++} dataEntity={dataEntity} />
         );
     })
 
     return (  
         <table className="dashboard-table standard-table">
-            {headers}
-            {rows}
+            <thead>
+                <Headers />
+            </thead>
+            <tbody>
+                {rows}
+            </tbody>
         </table>
     );
 }
  
-export default StandardTable;
+export default withDashboardContext(StandardTable);

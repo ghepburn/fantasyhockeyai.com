@@ -14,6 +14,28 @@ from .utils.loader import Loader
 def home():
     return "HOME PAGE BABY"
 
+@app.route("/api/players")
+def getPlayers():
+    players = Player.query.all()
+    result = []
+
+    for i in range(len(players)):
+        result.append(players[i].to_dict())
+    
+    response = {"players": result}
+    return json.dumps(response)
+
+@app.route("/api/goalies")
+def getGoalies():
+    goalies = Goalie.query.all()
+    result = []
+
+    for i in range(len(goalies)):
+        result.append(goalies[i].to_dict())
+    
+    response = {"goalies": result}
+    return json.dumps(response)
+
 @app.route("/api/nhl", methods=['POST'])
 def inputData():
 
